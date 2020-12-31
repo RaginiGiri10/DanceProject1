@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.raginigiri.entity.Admin_Panel_Entity;
 import com.raginigiri.repository.Admin_Panel_Repository;
+import com.raginigiri.util.DataNotFoundException;
 import com.raginigiri.util.Response;
 
 @Service
@@ -44,20 +45,15 @@ public class Admin_Panel_Service {
 		return response;
 	}
 
-	public Admin_Panel_Entity getbyid(int id) {
-		Admin_Panel_Entity admin_Panel_Entity = new Admin_Panel_Entity();
-		Response response = new Response();
+	public Admin_Panel_Entity getbyid(int id) throws DataNotFoundException {
 
 		Optional<Admin_Panel_Entity> admin = repository.findById(id);
 		if (admin.isPresent()) {
-			response.setMessage("00");
-			response.setMessage("The Data has been found");
+			return repository.findById(id).get();
 		} else {
-			response.setMessage("00");
-			response.setMessage("The Data has not been found");
+			throw new DataNotFoundException("Given id is not present");
 		}
 
-		return admin_Panel_Entity;
 	}
 
 	public List<Admin_Panel_Entity> getList() {

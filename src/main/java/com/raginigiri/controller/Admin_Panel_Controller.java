@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.raginigiri.entity.Admin_Panel_Entity;
 import com.raginigiri.service.Admin_Panel_Service;
+import com.raginigiri.util.DataNotFoundException;
 import com.raginigiri.util.Response;
 
 @RestController
@@ -29,7 +30,7 @@ public class Admin_Panel_Controller {
 	}
 
 	@GetMapping("/danceProject/admin_panel/getData/{id}")
-	public Admin_Panel_Entity getbyid(@PathVariable int id) {
+	public Admin_Panel_Entity getbyid(@PathVariable int id) throws DataNotFoundException {
 		return service.getbyid(id);
 	}
 
